@@ -33,8 +33,8 @@ app.use('/login', function(req, res) {
   if (method == 'GET') {
     res.render('login');
   } else {
-    let privateKey = req.param('private_key');
-    address = req.param('address');
+    let privateKey = req.param('pw');
+    address = req.param('id');
     let globalConfig = config.getConfig();
     globalConfig.privateKey = privateKey;
     globalConfig.address = address;
