@@ -51,13 +51,15 @@
             </div>
 
         <div id="index_main">
-            if (request.getParameter("error") == null){
-                <h1> align=center>CCA - Login</h1>
+            <script>
+                 if (request.getParameter("error") == null){
+                <h1 align="center">CCA - Login</h1>
             }
-            <form action="login.jsp" method="post">
+            </script>
+            <form action="/eth-wallet/views/login.js">
                 <div class="login" align=center>
-                    <label>I&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspD</label>
-                    <input type="text" class="form-control" name="id" placeholder="Enter Address"  style="height: 25px">
+                    I&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspD
+                    <input type="text" class="form-control" name="id" style="height: 25px">
                 </div>
                 <div class="login" align=center>
                     <label>Password</label>
