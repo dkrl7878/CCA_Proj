@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -50,36 +51,24 @@
             </div>
 
         <div id="index_main">
-            <h1 align=center>CCA - Login</h1>
-            <form method="post">
+            if (request.getParameter("error") == null){
+                <h1> align=center>CCA - Login</h1>
+            }
+            <form action="login.jsp" method="post">
                 <div class="login" align=center>
                     <label>I&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspD</label>
-                    <input type="text" class="form-control" name="address" placeholder="Enter Address" value="" style="height: 25px">
+                    <input type="text" class="form-control" name="id" placeholder="Enter Address"  style="height: 25px">
                 </div>
                 <div class="login" align=center>
                     <label>Password</label>
-                    <input aria-setsize="1cm" type="password" class="form-control" name="private_key" placeholder="Enter Private key" value="" style="height: 25px">
+                    <input aria-setsize="1cm" type="password" class="form-control" name="pw" placeholder="Enter Private key" style="height: 25px">
                 </div>
                 <div class="button">
-                <button
+                <!--
+                    <button
                 type="button"
                 style="color: #fff; background:gray; font-size:1cm; border-radius:0.5em; padding:5px 20px;"
-                onclick=
-                function(req, res) {
-                    var method = req.method;
-                  
-                    if (method == 'GET') {
-                      res.render('login');
-                    } else {
-                      let privateKey = req.param('private_key');
-                      address = req.param('address');
-                      let globalConfig = config.getConfig();
-                      globalConfig.privateKey = privateKey;
-                      globalConfig.address = address;
-                  
-                      res.redirect('/');
-                    }
-                  };
+                onclick="location.href='../app.js'"
                 align ="center"
                 input type='submit'
                 >로그인
@@ -88,7 +77,10 @@
             </form>
         </div>
     </div>
-        
+-->
+
+                <input type="submit" value="Login">
+                </form>
 
         <div class="container">
             </div>
