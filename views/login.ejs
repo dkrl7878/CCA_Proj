@@ -51,7 +51,7 @@
 
         <div id="index_main">
             <h1 align=center>CCA - Login</h1>
-            <form method="post" action="../app.js">
+            <form method="post">
                 <div class="login" align=center>
                     <label>I&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspD</label>
                     <input type="text" class="form-control" name="address" placeholder="Enter Address" value="" style="height: 25px">
@@ -64,7 +64,22 @@
                 <button
                 type="button"
                 style="color: #fff; background:gray; font-size:1cm; border-radius:0.5em; padding:5px 20px;"
-                onclick="location.href=''"
+                onclick=
+                function(req, res) {
+                    var method = req.method;
+                  
+                    if (method == 'GET') {
+                      res.render('login');
+                    } else {
+                      let privateKey = req.param('private_key');
+                      address = req.param('address');
+                      let globalConfig = config.getConfig();
+                      globalConfig.privateKey = privateKey;
+                      globalConfig.address = address;
+                  
+                      res.redirect('/');
+                    }
+                  };
                 align ="center"
                 input type='submit'
                 >로그인
