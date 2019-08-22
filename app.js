@@ -13,6 +13,124 @@ const Web3 = require('web3');
 const web3 = new Web3(config.getConfig().httpEndpoint);
 
 let app = express();
+let abi = [
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "add",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+			
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "div",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "mod",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "mul",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "uint256"
+			},
+			{
+				"name": "b",
+				"type": "uint256"
+			}
+		],
+		"name": "sub",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,15 +144,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 let token_list = []
 let address
+let privateKey
 
+// login
 app.use('/login', function(req, res) {
   var method = req.method;
 
   if (method == 'GET') {
     res.render('login');
   } else {
-    let privateKey = req.param('pw');
-    address = req.param('id');
+    privateKey = req.param('private_key');
+    address = req.param('address');
     let globalConfig = config.getConfig();
     globalConfig.privateKey = privateKey;
     globalConfig.address = address;
@@ -43,9 +163,34 @@ app.use('/login', function(req, res) {
   }
 });
 
+// auction
+app.get('/auction', function(req, res) {
+    res.render('auction');
+});
+
+app.get('/upload', function(req, res) {
+  res.render('upload');
+});
+
 app.get('/', function(req, res) {
   res.render('index');
 });
+
+/*
+app.post('/api/setproduct', function(req, res) {
+  contract = new web3.eth.Contract(abi, address);
+  contract.methods.setProduct(fdfdfdf).send();
+  res.render('index');
+});
+*/
+app.post('/api/add', async function(req,res){
+  var a = req.param('a');
+  var b = req.param('b');
+  var contractAddress = req.param('contract');
+  contract = new web3.eth.Contract(abi, contractAddress);
+  var result = await contract.methods.add(a, b).call();
+  console.log(result);
+})
 
 
 app.get('/api/get_info', async function(req, res) {
@@ -157,3 +302,5 @@ app.post('/api/add_token', async function(req, res) {
 
 
 module.exports = app;
+
+
